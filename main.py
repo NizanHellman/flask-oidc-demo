@@ -20,11 +20,7 @@ app.config.update({
     'DEBUG': True,
     'OIDC_CLIENT_SECRETS': 'client_secrets.json' if is_okta else 'client_secrets_icp.json',
     'OIDC_ID_TOKEN_COOKIE_SECURE': False,
-    # 'OIDC_REQUIRE_VERIFIED_EMAIL': False,
     'OIDC_OPENID_REALM': OKTA if is_okta else ICP
-    # 'OIDC_VALID_ISSUERS': ['https://dev-209322.okta.com', 'https://platform.login.testing-domain.illumina.com',
-    #                        'https://platform.login.testing-domain.illumina.com/platform-services-manager',
-    #                        'http://platform.us.informatics.illumina.com:8080/platform-services-manager']
 })
 oidc = OpenIDConnect(app)
 
@@ -60,7 +56,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    # host = 'wcnda2.localhost.illumina.com'
     host = 'localhost' if is_okta else 'wcnda2.localhost.illumina.com'
     ssl_context = None if is_okta else 'adhoc'
     app.run(host=host, port=5000, debug=True, ssl_context=ssl_context)
